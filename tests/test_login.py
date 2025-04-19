@@ -4,6 +4,8 @@ from src.schema.Schema import *
 from faker import Faker
 
 class TestLogin:
+    fake_email = Faker().email()
+    
     def test_valid_login(self):
         api = ApiClient()
         payload = {
@@ -56,11 +58,10 @@ class TestLogin:
         validate(response, post_invalid_login_schema)    
         
     def test_create_user(self):
-        fake = Faker()
         api = ApiClient()
         payload = {
             'name': 'Test Name',
-            'email': fake.email(),
+            'email': self.fake_email,
             'password': 'test',
             'title': 'Mr',
             'birth_date': '12',
@@ -84,5 +85,17 @@ class TestLogin:
         assert str(message).lower().__contains__("user created")
         validate(response, post_create_user_schema)
         
-    
+    def test_delete_user(self):
+        api = ApiClient()
+        payload = {
+            'email': self.fake_email,
+            'password': 'test'
+        }
+        response = api.delete("/deleteAccount", data=payload)
+        responseCode = response['responseCode']
+        message = response['message']
+        
+        assert responseCode == 200
+        assert str(message).lower().__contains__("account deleted")
+        validate(response, delete_user_schema)
         
