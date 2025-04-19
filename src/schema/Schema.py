@@ -132,3 +132,30 @@ post_update_user_schema = {
     }
 }
 
+get_user_details_schema = {
+    "type" : "object",
+    "properties" : {
+        "responseCode" : {"type" : "number"},
+        "user" : {
+            "type" : "object",
+            "properties" : {
+                "id" : {"type" : "number"},
+                "name" : {"type" : "string"},
+                "email" : {"type" : "string"},
+                "title" : {"type" : "string"},
+                "birth_day" : {"type" : "string"},
+                "birth_month" : {"type" : "string"},
+                "birth_year" : {"type" : "string"},
+                "first_name" : {"type" : "string"},
+                "last_name" : {"type" : "string"},
+                "company" : {"type" : "string"},
+                "address1" : {"type" : "string"},
+                "address2" : {"type" : "string"},
+                "country" : {"type" : "string"},
+                "state" : {"type" : "string"},
+                "city" : {"type" : "string"},
+                "zipcode" : {"type" : "string"}
+            }
+        }
+    }
+}
