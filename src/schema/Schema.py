@@ -108,4 +108,13 @@ post_invalid_login_schema = {
     }
 }
 
+post_create_user_schema = {
+    "type" : "object",
+    "properties" : {
+        "responseCode" : {"type" : "number"},
+        "message" : {"type" : "string"}
+    }
+}
+
+
 
