@@ -92,4 +92,11 @@ post_login_without_email_schema = {
     }
 }
 
+delete_to_verify_login_schema = {
+    "type" : "object",
+    "properties" : {
+        "responseCode" : {"type" : "number"},
+        "message" : {"type" : "string"}
+    }
+}
 
