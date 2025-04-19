@@ -11,7 +11,7 @@ class TestProducts:
         
         assert responseCode == 200
         assert len(products) >= 1
-        validate(response, get_post_all_products_response_schema)
+        validate(response, get_all_products_response_schema)
         for product in products:
             validate(product, product_schema)
             
@@ -34,9 +34,17 @@ class TestProducts:
         
         assert responseCode == 200
         assert len(products) >= 1
-        validate(response, get_post_all_products_response_schema)
+        validate(response, post_search_product_response_schema)
         for product in products:
             validate(product, product_schema)
-        
     
+    def test_post_to_search_product_without_payload(self):
+        api = ApiClient()
+        response = api.post("/searchProduct")
+        responseCode = response['responseCode']
+        message = response['message']
+        
+        assert responseCode == 400
+        assert str(message).lower().__contains__("search_product parameter is missing")
+        validate(response, post_search_product_without_payload_response_schema)
     
