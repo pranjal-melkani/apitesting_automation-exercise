@@ -76,6 +76,12 @@ post_search_product_without_payload_response_schema = {
     }
 }
 
-
+post_valid_login_schema = {
+    "type" : "object",
+    "properties" : {
+        "responseCode" : {"type" : "number"},
+        "message" : {"type" : "string"}
+    }
+}
 
 
