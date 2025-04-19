@@ -16,8 +16,8 @@ class TestLogin:
         responseCode = response['responseCode']
         message = response['message']
         
-        assert responseCode == 200
-        assert str(message).lower().__contains__("user exists")
+        assert responseCode == 200, "Expected response code: 200"
+        assert str(message).lower().__contains__("user exists"), "Expected 'User Exists' message"
         validate(response, post_valid_login_schema)
         
     def test_login_without_email(self):
@@ -29,8 +29,9 @@ class TestLogin:
         responseCode = response['responseCode']
         message = response['message']
 
-        assert responseCode == 400
-        assert str(message).lower().__contains__("email or password parameter is missing")
+        assert responseCode == 400, "Expected response code: 400"
+        assert str(message).lower().__contains__("email or password parameter is missing"), \
+            "Expected 'Email or password parameter is missing' message"
         validate(response, post_login_without_email_schema)
         
     def test_delete_to_verify_login(self):
@@ -39,8 +40,9 @@ class TestLogin:
         responseCode = response['responseCode']
         message = response['message']
         
-        assert responseCode == 405
-        assert str(message).lower().__contains__("this request method is not supported")
+        assert responseCode == 405, "Expected response code: 405"
+        assert str(message).lower().__contains__("this request method is not supported"), \
+            "Expected 'This method is not supported' message"
         validate(response, delete_to_verify_login_schema)
         
     def test_invalid_login(self):
@@ -53,8 +55,8 @@ class TestLogin:
         responseCode = response['responseCode']
         message = response['message']
         
-        assert responseCode == 404
-        assert str(message).lower().__contains__("user not found")
+        assert responseCode == 404, "Expected response code: 404"
+        assert str(message).lower().__contains__("user not found"), "Expected 'User Not Found' message"
         validate(response, post_invalid_login_schema)    
         
     def test_create_user(self):
@@ -81,8 +83,8 @@ class TestLogin:
         responseCode = response['responseCode']
         message = response['message']
         
-        assert responseCode == 201
-        assert str(message).lower().__contains__("user created")
+        assert responseCode == 201, "Expected response code: 201"
+        assert str(message).lower().__contains__("user created"), "Expected 'User Created' message"
         validate(response, post_create_user_schema)
     
     def test_update_user(self):
@@ -109,9 +111,22 @@ class TestLogin:
         responseCode = response['responseCode']
         message = response['message']
         
-        assert responseCode == 200
-        assert str(message).lower().__contains__("user updated")
+        assert responseCode == 200, "Expected response code: 200"
+        assert str(message).lower().__contains__("user updated"), "Expected 'User Updated' message"
         validate(response, post_update_user_schema)
+    
+    def test_get_userdetails(self):
+        api = ApiClient()
+        params = {
+            'email': self.fake_email,
+        }
+        response = api.get("/getUserDetailByEmail", query_parameters=params)
+        responseCode = response['responseCode']
+        user = response['user']
+        
+        assert responseCode == 200, "Expected response code: 200"
+        assert user is not None, "No user found"
+        validate(response, get_user_details_schema)
     
     def test_delete_user(self):
         api = ApiClient()
@@ -123,7 +138,7 @@ class TestLogin:
         responseCode = response['responseCode']
         message = response['message']
         
-        assert responseCode == 200
-        assert str(message).lower().__contains__("account deleted")
+        assert responseCode == 200, "Expected response code: 200"
+        assert str(message).lower().__contains__("account deleted"), "Expected 'Account Deleted' message"
         validate(response, delete_user_schema)
         
