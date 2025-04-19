@@ -52,4 +52,15 @@ brand_schema = {
     }
 }
 
+put_all_brands_schema = {
+    "type" : "object",
+    "properties" : {
+        "responseCode" : {"type" : "number"},
+        "message" : {"type" : "string"}
+    }    
+}
+
+
+
+
 
