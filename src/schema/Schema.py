@@ -100,3 +100,12 @@ delete_to_verify_login_schema = {
     }
 }
 
+post_invalid_login_schema = {
+    "type" : "object",
+    "properties" : {
+        "responseCode" : {"type" : "number"},
+        "message" : {"type" : "string"}
+    }
+}
+
+
