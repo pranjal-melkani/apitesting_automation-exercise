@@ -1,4 +1,4 @@
-get_post_all_products_response_schema = {
+get_all_products_response_schema = {
         "type" : "object",
         "properties" : {
             "responseCode" : {"type" : "number"}, 
@@ -60,6 +60,21 @@ put_all_brands_schema = {
     }    
 }
 
+post_search_product_response_schema = {
+        "type" : "object",
+        "properties" : {
+            "responseCode" : {"type" : "number"}, 
+            "products" : {"type" : "array"}
+        }
+}
+
+post_search_product_without_payload_response_schema = {
+    "type" : "object",
+    "properties" : {
+        "responseCode" : {"type" : "number"},
+        "message" : {"type" : "string"}
+    }
+}
 
 
 
