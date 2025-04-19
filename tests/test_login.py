@@ -84,7 +84,35 @@ class TestLogin:
         assert responseCode == 201
         assert str(message).lower().__contains__("user created")
         validate(response, post_create_user_schema)
+    
+    def test_update_user(self):
+        api = ApiClient()
+        payload = {
+            'name': 'Test Name 01',
+            'email': self.fake_email,
+            'password': 'test',
+            'title': 'Mr',
+            'birth_date': '12',
+            'birth_month': '1',
+            'birth_year': '1967',
+            'firstname': 'First Name',
+            'lastname': 'Last Name',
+            'company': 'Company',
+            'address1': 'Address 1',
+            'address2': 'Address 2',
+            'country': 'Country',
+            'zipcode': 'Zip code',
+            'state': 'State',
+            'city': 'City',
+            'mobile_number': '1234567890'}
+        response = api.put("/updateAccount", data=payload)
+        responseCode = response['responseCode']
+        message = response['message']
         
+        assert responseCode == 200
+        assert str(message).lower().__contains__("user updated")
+        validate(response, post_update_user_schema)
+    
     def test_delete_user(self):
         api = ApiClient()
         payload = {
