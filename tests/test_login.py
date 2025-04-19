@@ -40,3 +40,20 @@ class TestLogin:
         assert str(message).lower().__contains__("this request method is not supported")
         validate(response, delete_to_verify_login_schema)
         
+    def test_invalid_login(self):
+        api = ApiClient()
+        payload = {
+            "email" : "invalidemail",
+            "password" : "invalidpassword"
+        }
+        response = api.post("/verifyLogin", data=payload)
+        responseCode = response['responseCode']
+        message = response['message']
+        
+        assert responseCode == 404
+        assert str(message).lower().__contains__("user not found")
+        validate(response, post_invalid_login_schema)    
+        
+        
+    
+        
