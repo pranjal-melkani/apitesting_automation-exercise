@@ -1,4 +1,4 @@
-get_all_products_response_schema = {
+get_post_all_products_response_schema = {
         "type" : "object",
         "properties" : {
             "responseCode" : {"type" : "number"}, 
