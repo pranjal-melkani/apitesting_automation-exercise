@@ -14,3 +14,13 @@ class TestBrands:
         validate(response, get_all_brands_list_schema)
         for brand in brands:
             validate(brand, brand_schema)
+            
+    def test_put_all_brands_list(self):
+        api = ApiClient()
+        response = api.put("/brandsList")
+        responseCode = response['responseCode']
+        message = response['message']
+        
+        assert responseCode == 405
+        assert str(message).lower().__contains__("this request method is not supported")
+        validate(response, put_all_brands_schema)
