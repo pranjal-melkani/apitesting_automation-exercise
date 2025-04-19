@@ -50,3 +50,19 @@ class ApiClient:
             return response.json()
         except Exception as e:
             raise Exception(f"PUT request failed: {str(e)}")
+        
+    def delete(self, endpoint, data=None, json=None, query_parameters=None):
+        url = f"{self.config.base_url}{endpoint}"
+        try:
+            response = requests.delete(
+                url,
+                headers= self.config.headers,
+                data= data,
+                json= json,
+                params= query_parameters,
+                timeout= self.config.timeout
+            )
+            response.raise_for_status()
+            return response.json()
+        except Exception as e:
+            raise Exception(f"DELETE request failed: {str(e)}")
