@@ -116,5 +116,12 @@ post_create_user_schema = {
     }
 }
 
+delete_user_schema = {
+    "type" : "object",
+    "properties" : {
+        "responseCode" : {"type" : "number"},
+        "message" : {"type" : "string"}
+    }
+}
 
 
