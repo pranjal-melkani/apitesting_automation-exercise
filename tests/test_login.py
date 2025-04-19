@@ -1,6 +1,7 @@
 from src.api_client.client import ApiClient
 from jsonschema import validate
 from src.schema.Schema import *
+from faker import Faker
 
 class TestLogin:
     def test_valid_login(self):
@@ -54,6 +55,34 @@ class TestLogin:
         assert str(message).lower().__contains__("user not found")
         validate(response, post_invalid_login_schema)    
         
+    def test_create_user(self):
+        fake = Faker()
+        api = ApiClient()
+        payload = {
+            'name': 'Test Name',
+            'email': fake.email(),
+            'password': 'test',
+            'title': 'Mr',
+            'birth_date': '12',
+            'birth_month': '1',
+            'birth_year': '1967',
+            'firstname': 'First Name',
+            'lastname': 'Last Name',
+            'company': 'Company',
+            'address1': 'Address 1',
+            'address2': 'Address 2',
+            'country': 'Country',
+            'zipcode': 'Zip code',
+            'state': 'State',
+            'city': 'City',
+            'mobile_number': '1234567890'}
+        response = api.post("/createAccount", data=payload)
+        responseCode = response['responseCode']
+        message = response['message']
+        
+        assert responseCode == 201
+        assert str(message).lower().__contains__("user created")
+        validate(response, post_create_user_schema)
         
     
         
