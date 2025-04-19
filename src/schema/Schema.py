@@ -124,4 +124,11 @@ delete_user_schema = {
     }
 }
 
+post_update_user_schema = {
+    "type" : "object",
+    "properties" : {
+        "responseCode" : {"type" : "number"},
+        "message" : {"type" : "string"}
+    }
+}
 
